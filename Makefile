@@ -1,0 +1,34 @@
+CC=g++
+
+SOURCES=main.c++ Problem.c++
+EXECUTABLE=run
+
+STATIC=-DSCHEDULE=0
+DYNAMIC=-DSCHEDULE=1
+GUIDED=-DSCHEDULE=2
+
+LOCKON=-DLOCK=1
+LOCKOFF=-DLOCK=0
+
+OPENMP=-fopenmp
+
+static:
+	$(CC) $(STATIC) $(LOCKOFF) $(SOURCES) -o $(EXECUTABLE) $(OPENMP)
+
+dynamic:
+	$(CC) $(DYNAMIC) $(LOCKOFF) $(SOURCES) -o $(EXECUTABLE) $(OPENMP)
+
+guided:
+	$(CC) $(GUIDED) $(LOCKOFF) $(SOURCES) -o $(EXECUTABLE) $(OPENMP)
+
+staticlock:
+	$(CC) $(STATIC) $(LOCKON) $(SOURCES) -o $(EXECUTABLE) $(OPENMP)
+
+dynamiclock:
+	$(CC) $(DYNAMIC) $(LOCKON) $(SOURCES) -o $(EXECUTABLE) $(OPENMP)
+
+guidedlock:
+	$(CC) $(GUIDED) $(LOCKON) $(SOURCES) -o $(EXECUTABLE) $(OPENMP)
+
+clean:
+	rm -rf *.o $(EXECUTABLE)
